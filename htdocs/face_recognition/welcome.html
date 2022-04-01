@@ -1,0 +1,110 @@
+<!doctype html> 
+<html>
+<head>
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+</script>
+<script> 
+$(function(){ //This is to load the header & footer of page
+  $("#header").load("header.html"); 
+  $("#footer").load("footer.html"); 
+});
+</script> 
+	<link rel="stylesheet" href="css/table.css">
+</head>
+<body>
+<div id="header"></div> <!--The header of page-->
+
+<h2>Welcome!</h2>
+	<p>This is a facial recognition system developed by Lo Zhan Preston from UTHM as part of fulfilment for Degree requirement.</p>
+ <div>
+    <table>
+        <tr>
+            <th>Page</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Welcome</td>
+            <td>Welcoming page that explains how to go through this system.</td>
+        </tr>
+		<tr>
+            <td>Notification</td>
+            <td>To display LATE/EARLY/NO RECORD messages. Whenever an employee has taken an attendance, but he's late for more than 30 minutes, a LATE message will be displayed.</td>
+        </tr>
+		<tr>
+            <td>Report</td>
+            <td>To display the analysis of the employee for the month. <br> <br>
+				Attendance column. Display attendance percentage, is affected by Late and Early column, but does not affected by No Record column. Formula: (Total Days - Late - Early) / Total days <br> <br>
+				Late column. Display how many times an employee is late for work. Late will only count employee who is late more than 30 minutes. Then, it will display the date that the employee is late on. <br> <br>
+				Early column. Display how many times an employee leaves early for break. For example, afternoon break time starts at 12:30pm, but the employee leaves for break at 12:20pm. Then the system will display the <b>Early</b> warning. Next, a date will be displayed to show which date the employee has gotten the <b>Early</b> warning.<br> <br>
+				No Record column. Display how many times an employee did not record their attendance. 
+			</td>
+        </tr>
+		<tr>
+            <td>Register Employee</td>
+            <td>To register employee into system.<br> <br>
+				Employee ID. You can only enter numbers, recommended to keep it simple, such as ID = 1, ID = 2, ID = 3... <br><br>
+				First Name. The First name of the employee.<br>
+				Middle Name. The Middle name of the employee, can be NULL. <br>
+				Last Name. The Last name of the employee, can be NULL. <br><br>
+				Job Position. Choose from a list of job positions. They are Supervisor, Assistant Supervisor, Training Supervisor, EDP Clerk, and General Worker. <br><br>
+				Registered employee can be seen in the <b>List of Employee</b> page.
+			</td>
+        </tr>
+		<tr>
+            <td>Insert Timetable</td>
+            <td>To register working days for the employee. <br>
+				You must register some employee in <b>Register Employee</b> page first before continuing at this page.<br> <br>
+				Step 1. Choose a date by clicking on the Date Box. <br>
+				Step 2. Choose an employee from the list by clicking the button. The number of employees it displays can be seen in the <b>List of Employee</b> page.<br>
+				Step 3. Select shift (Morning, Afternoon, Full Day) for that date.<br>
+				Step 4. Click Apply.<br><br>
+				Registered data can be viewed in <b>View Timetable</b> page.
+				</td>
+        </tr>
+		<tr>
+            <td>View Timetable</td>
+            <td>To display which employee will be working on that particular date. <br><br>
+			Employee will be displayed in this format (ID First Name Middle Name Last Name).
+			</td>
+        </tr>
+		<tr>
+            <td>Change/Delete Timetable</td>
+            <td>To change or delete an employee from the timetable. There are 2 tables, <b>Change Timetable</b> table and <b>Delete Timetable</b> table. <br> <br>
+			<b>Change Timetable</b> table. <br>
+				Step 1. Select an employee on the particular date.<br>
+				Step 2. Select new date (Can be the same date).<br>
+				Step 3. Select new employee (Can be the same employee).<br>
+				Step 4. Select new shift (Can be the same shift).<br>
+				Step 5. Click Change button.<br>
+				Note: Only dates after today's date is allowed to be changed.</td>
+        </tr>
+		<tr>
+            <td>View Attendance</td>
+            <td>To view the recorded attendance for a particular employee on particular date. <br>
+			The table consists of 5 timestamp, Morning, Afternoon Break, Afternoon, Evening Break, Evening, and End. <br>
+			Employee who has <b>Morning Shift</b> will be using Morning (8AM-12:30PM), Afternoon Break (12:30PM-1:30PM), Afternoon (1:30PM-5PM), End (5PM) timestamp. <br>
+			Employee who has <b>Afternoon Shift</b> will be using Afternoon (12:30-4PM, Evening Break (4PM-5PM), Evening (5PM-9L30PM), and End (9:30PM) timestamp.<br>
+			Employee who has <b>Full Day Shift</b> will be using all the 5 timestamps. Morning (8AM-12:30PM), Afternoon Break (12:30PM-1:30PM), Afternoon (1:30PM-4PM), Evening Break (4PM-5PM), Evening (5PM-9:30PM), End (9:30PM)<br><br>
+			<b>Late</b> indicates the employee recorded the attendance 30 minutes later than the stipulated time.<br>
+			<b>Early</b> indicates the employee recorded the attendance early than the break time. For example, Afternoon breaks start at 12:30PM, but employee recorded attendance at 12:20PM. <br>
+			<b>No Record</b> indicates employee did not record attendance on that particular timestamp. <br>
+			<b>Nil</b> indicates that the particular timestamp does not belong to the shift. For example, Morning Shift will only use 4 timestamps, they are Morning, Afternoon Break, Afternoon, and End. Thus, Evening Break and Evening timestamp will display <b>Nil</b> as it not part of the Morning Shift.
+			</td>
+        </tr>
+		<tr>
+            <td>List of Employees</td>
+            <td>To display list of registered employee in the system.<br>
+			Employee that has been registered through <b>Register Employee</b> page will be displayed here.</td>
+        </tr>
+     </table>
+     <br>
+</div>
+
+
+
+<div id="footer"></div> <!--The footer of page-->
+</body>
+</html>

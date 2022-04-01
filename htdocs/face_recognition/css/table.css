@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*This CSS is use to styling table*/
+
+/*Add border AND padding*/
+th, td {
+  border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-right:25px;
+}
+
+
+th {
+	background-color: #ECECEC;
+}
+
+
+/*Add mouse hover change backgroudn color*/
+tr:hover {background-color: #f5f5f5;}
+
+
+/*Add spaces between columns and set text to left*/
+/*Decides to remove it cos it's not nice, use padding-right instead, but not in tables, use in th and td*/
+table {
+  border-collapse: separate;
+  /*border-spacing: 25px 0;*/
+	text-align: left;
+}
+

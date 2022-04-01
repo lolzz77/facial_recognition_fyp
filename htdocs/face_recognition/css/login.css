@@ -1,0 +1,18 @@
+@charset "utf-8";
+.loginbox-wrapper {
+}
+.loginbox {
+    display: block;
+    border-style: solid;
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.loginbox-wrapper .loginbox form {
+    display: inherit;
+    margin-left: 20px;
+    margin-top: 20px;
+}

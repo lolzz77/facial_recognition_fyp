@@ -1,0 +1,156 @@
+To export to executable
+
+cd C:\Users\AsusROG\source\repos\FaceRecognition\FaceRecognition
+pyinstaller --onefile 'filename.py'
+
+
+To run executable
+& dist/'filename.exe'
+
+
+-----------------------------------
+//Code backup, retrieving time from database
+
+import connect_database as db #connect_database is a .py file
+import datetime
+
+mycursor = db.conn.cursor(buffered=True) #To use the variable from a file, must call the file name
+#I get the error 'Unread result found' and forced to put buffered=True into argument
+
+sql_time = """SELECT m_start, m_break_s, m_break_e, m_end,
+a_start, a_break_s, a_break_e, a_end,
+f_start, f_break1_s, f_break1_e, f_break2_s, f_break2_e, f_end
+FROM time"""
+
+mycursor.execute(sql_time)
+m_start, m_break_s, m_break_e, m_end, a_start, a_break_s, a_break_e, a_end, f_start, f_break1_s, f_break1_e, f_break2_s, f_break2_e, f_end = mycursor.fetchone()
+
+print (m_start)
+
+
+-------------------------------------------------------
+https://stackoverflow.com/questions/41897027/python-removing-brackets-from-a-list-of-results
+This shows how to remove (,)
+When you retrieve data from databse and display it, python will display (x,)
+
+This is becos python is returning tuple, not string, simply removing (,) wont work
+The solution? Do this
+
+cur.execute(query)
+for Device in cur.fetchall() :
+       dev = Device[0]
+      
+print("device=",dev)
+
+
+But this only works for 1 value, if got multiple value, use this
+
+
+z = ((1, 2, 3), (4, 5))
+y = [a for b in z for a in b]
+print(y)
+
+------------------------------------------------------------------
+How to interate through list of tuples
+https://www.kite.com/python/answers/how-to-iterate-through-a-list-of-tuples-in-python
+
+example, u have
+list_of_tuples = [("Betty", 45), ("John" , 84), ("Malik" , "34"), ("Jose" , 20)]
+U want output like this
+Betty 45
+John 84
+Malik 34
+Jose 20
+
+Code explain
+mycursor.execute("SELECT emp_id, first_n, middle_n, last_n FROM employee")
+names = mycursor.fetchall()
+for index, tup in enumerate(names):
+    a = tup[0]
+    b = tup[1]
+    c = tup[2]
+    d = tup[3]
+    print(a,b,c,d)
+
+names holds data ("1" "Preston" "" "Lo"), ("2"....)....
+the parameter in for loop is fixed, that is 2 param only
+the first param is the index of the tuple, 2nd param is the value
+inside the loop, put a = tup[0] to assign the emp_id to "a"
+put b = tup[1] to assign first_n to "b"
+.... and so on
+
+
+-----------------------------------------------
+
+#For comparing time: To check if late 30 mintues
+a30mins = now.replace(hour=0, minute=30, microsecond=0)
+zero = now.replace(hour=0, minute=0, microsecond=0)
+diff = a30mins - zero
+seconds = now - a0800
+msg =''
+if (seconds > diff):
+    msg = 'LATE'
+else:
+    msg = 'FKU'
+
+------------------------------
+in Face Recognizer
+sql_time = """SELECT t_morning, t_afternoon_break, t_afternoon, t_evening_break, t_evening, t_end
+FROM timestamp
+WHERE date="{}" AND emp_id={}""".format(d, id)
+
+------------------------------
+
+
+
+
+
+TO EXPORT TO EXECUTABLE (Version 2)
+
+1. From Microsfot Visual Studio, click Python Environment
+2. Click Open in Powershell
+3. type pip install pyinstaller
+4. The installed scrrpt is stored in C:\Users\%USERNAME%\AppData\Roaming\Python\Python37\Scripts
+5. copy the pyinstaller script and paste it into new folder
+6. copy the .py code file that u want to expoert to executable into the same new folder
+7. Open commmand prompt
+8. 'cd' command to change directory to the new folder directory
+9. now type the command 'pyinstaller --onefile -w 'filename'.py
+10. you should not be able to see the error "pyinstaller is not recognized... bla bla bla"
+11. That's how it works, anyways, if u add it to the PATH, then u dont need to move ur pyinstaller script to new folder and
+use the 'cd' command in command prompt as well, that's how it works
+12. after finished compiling, go to folder "dist" which means distribution, ur executable file is in there
+
+ERROR: Fail to execute script
+Possible causes
+1. import cv2 causes (Yes, caused by this, see https://stackoverflow.com/questions/59189791/how-to-include-opencv-in-pyinstaller-when-opencv-is-installed-from-source)
+2. you have imported other .py files (Not caused by this, the command '--onefile' has this settled, see https://stackoverflow.com/questions/51455765/build-multiple-py-files-into-a-single-executable-file-using-pyinstaller)
+3. XAMPP not initiated
+4. Mising "Cascade" folder, the one with the code face_detector = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
+5. Missing other required folder, u have to take note of the error msg displayed before it closes || Or open the executable using command prompt
+
+Solution:
+1. Put print(cv2.__file__) code uner import cv2
+2. compile it, take note of the output, the output i get is C:\Users\Asus2016\AppData\Roaming\Python\Python37\site-packages\cv2\cv2.cp37-win_amd64.pyd
+3. Now, remove the print(cv2.__file__) code
+4. open command prompt
+5. type this 
+pyinstaller --onefile --paths="C:\Users\Asus2016\AppData\Roaming\Python\Python37\site-packages" 'filename'.py
+
+Do note that the output i get is
+C:\Users\Asus2016\AppData\Roaming\Python\Python37\site-packages\cv2\cv2.cp37-win_amd64.pyd
+But i have to shorten it to
+C:\Users\Asus2016\AppData\Roaming\Python\Python37\site-packages
+This is because ur 'filename'.py, the import is "import cv2", so u dont need to include the "cv2\cv2.cp37-win_amd64.pyd" in it
+
+6. You should have no problem now
+7. Btw, if ur code includes connecting to database, perhaps u have to start XAMPP in order for the data to be saved/queried
+8. Next, if ur executable auto close, then possibly because missing "cascade" folder, move the "cascade" folder into "dist" folder
+where ur executable is.
+9. If problems till persist, probably u're msising other folder, check the error msg
+NOTE: If u open executable by double clicking it, the executable will close immediately after error msg pop out
+To prevent this, run the executable using command prompt
+Open cmd
+use 'cd' to change directory to executable directory
+directly input this code 'filename'.exe
+That's it, if there's error, the error will display in the cmd.

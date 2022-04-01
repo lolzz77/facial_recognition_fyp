@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+</script>
+<script> 
+$(function(){ //This is to load the header & footer of page
+  $("#header").load("header.html"); 
+  $("#footer").load("footer.html"); 
+});
+</script> 
+</head>
+<body>
+<div id="header"></div> <!--The header of page-->
+	
+<div class="loginbox-wrapper">
+  <div class="loginbox">
+	  <form action="/face_recognition/php/employee_register.php" id="form1" name="" method="post">
+			<p>Employee ID</p>
+			<input type="text" name="emp_id" placeholder="Employee ID">
+			<p>Employee Name</p>
+			<input type="text" name="first_n" placeholder="First Name"> 
+            <input type="text" name="middle_n" placeholder="Middle Name">
+            <input type="text" name="last_n" placeholder="Last Name">
+            <p>Job Position</p>
+            <select name="job_position">
+              <option hidden disabled selected value> -- select an option -- </option>
+              <option value="supervisor">Supervisor</option>
+              <option value="assistant supervisor">Assistant Supervisor</option>
+              <option value="training supervisor">Training Supervisor</option>
+              <option value="edp clerk" selected>EDP Clerk</option>
+              <option value="general worker" selected>General Worker</option>
+            </select>
+          <br><br>
+			<button id="Button1" type="submit" value="Submit">Register</button>
+      </form>
+	</div>
+</div>
+
+
+<div id="footer"></div> <!--The footer of page-->
+
+</body>
+</html>
