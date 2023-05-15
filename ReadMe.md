@@ -23,3 +23,17 @@ FaceRecognizer.exe. If cannot open, make sure no other apps using camera
 into your XAMPP htdocs folder (D:\xampp\htdocs)
 
 #5 in your browser type http://localhost/face_recognition/index.html
+
+
+-----------------
+Library: OpenCV
+
+Language: HTML, CSS, JS, PHP, Python
+
+Software: XAMPP
+
+Databse: MySQL
+
+![image](https://github.com/lolzz77/facial_recognition_fyp/assets/61287457/716d17a9-1ee4-4c46-a114-77ad057636c2)
+
+![image](https://github.com/lolzz77/facial_recognition_fyp/assets/61287457/ed1e3e04-aea0-4b61-a8f9-b58c1621faf9)
